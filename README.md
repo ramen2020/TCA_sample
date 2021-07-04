@@ -1,4 +1,4 @@
 # TCA_sample
 swiftui / MVVM / The Composable Architecture
 
-The Composable Architecture のサンプルコード
+アーキテクチャーとして、The Composable Architecture を採用したアプリ

@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct misoranmenApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: Store(
+                initialState: ArticleState(),
+                reducer: articleReducer.debug(),
+                environment: ArticleEnvironment(
+                    qiitaAPIClient: QiitaAPIClient.live
+                )
+            ))
         }
     }
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,19 @@
 		66C6FC1C26919DAF00D3DAA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC1B26919DAF00D3DAA6 /* ContentView.swift */; };
 		66C6FC1E26919DB000D3DAA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66C6FC1D26919DB000D3DAA6 /* Assets.xcassets */; };
 		66C6FC2126919DB000D3DAA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66C6FC2026919DB000D3DAA6 /* Preview Assets.xcassets */; };
+		66C6FC2A26919E1400D3DAA6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 66C6FC2926919E1400D3DAA6 /* ComposableArchitecture */; };
+		66C6FC2D26919E6200D3DAA6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 66C6FC2C26919E6200D3DAA6 /* Kingfisher */; };
+		66C6FC302691A16600D3DAA6 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC2F2691A16600D3DAA6 /* State.swift */; };
+		66C6FC322691A16E00D3DAA6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC312691A16E00D3DAA6 /* Action.swift */; };
+		66C6FC342691A17D00D3DAA6 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC332691A17D00D3DAA6 /* Reducer.swift */; };
+		66C6FC362691A18A00D3DAA6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC352691A18A00D3DAA6 /* Environment.swift */; };
+		66C6FC382691A1A700D3DAA6 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC372691A1A700D3DAA6 /* ApiClient.swift */; };
+		66C6FC3B2691A20400D3DAA6 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC3A2691A20400D3DAA6 /* Article.swift */; };
+		66C6FC3E2691A24800D3DAA6 /* ArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC3D2691A24800D3DAA6 /* ArticleContentView.swift */; };
+		66C6FC402691A26300D3DAA6 /* ArticleFavoriteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC3F2691A26300D3DAA6 /* ArticleFavoriteContentView.swift */; };
+		66C6FC432691A28400D3DAA6 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC422691A28400D3DAA6 /* Indicator.swift */; };
+		66C6FC452691A29E00D3DAA6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC442691A29E00D3DAA6 /* WebView.swift */; };
+		66C6FC482691A31D00D3DAA6 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC472691A31D00D3DAA6 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +33,17 @@
 		66C6FC1D26919DB000D3DAA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66C6FC2026919DB000D3DAA6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		66C6FC2226919DB000D3DAA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66C6FC2F2691A16600D3DAA6 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		66C6FC312691A16E00D3DAA6 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		66C6FC332691A17D00D3DAA6 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		66C6FC352691A18A00D3DAA6 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		66C6FC372691A1A700D3DAA6 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		66C6FC3A2691A20400D3DAA6 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		66C6FC3D2691A24800D3DAA6 /* ArticleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentView.swift; sourceTree = "<group>"; };
+		66C6FC3F2691A26300D3DAA6 /* ArticleFavoriteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleFavoriteContentView.swift; sourceTree = "<group>"; };
+		66C6FC422691A28400D3DAA6 /* Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
+		66C6FC442691A29E00D3DAA6 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		66C6FC472691A31D00D3DAA6 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C6FC2D26919E6200D3DAA6 /* Kingfisher in Frameworks */,
+				66C6FC2A26919E1400D3DAA6 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +78,11 @@
 		66C6FC1826919DAF00D3DAA6 /* misoranmen */ = {
 			isa = PBXGroup;
 			children = (
+				66C6FC462691A30D00D3DAA6 /* Config */,
+				66C6FC412691A27A00D3DAA6 /* Module */,
+				66C6FC3C2691A22E00D3DAA6 /* View */,
+				66C6FC392691A1FA00D3DAA6 /* Model */,
+				66C6FC2E2691A15000D3DAA6 /* TCA */,
 				66C6FC1926919DAF00D3DAA6 /* misoranmenApp.swift */,
 				66C6FC1B26919DAF00D3DAA6 /* ContentView.swift */,
 				66C6FC1D26919DB000D3DAA6 /* Assets.xcassets */,
@@ -67,6 +98,52 @@
 				66C6FC2026919DB000D3DAA6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		66C6FC2E2691A15000D3DAA6 /* TCA */ = {
+			isa = PBXGroup;
+			children = (
+				66C6FC2F2691A16600D3DAA6 /* State.swift */,
+				66C6FC312691A16E00D3DAA6 /* Action.swift */,
+				66C6FC332691A17D00D3DAA6 /* Reducer.swift */,
+				66C6FC352691A18A00D3DAA6 /* Environment.swift */,
+				66C6FC372691A1A700D3DAA6 /* ApiClient.swift */,
+			);
+			path = TCA;
+			sourceTree = "<group>";
+		};
+		66C6FC392691A1FA00D3DAA6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				66C6FC3A2691A20400D3DAA6 /* Article.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		66C6FC3C2691A22E00D3DAA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				66C6FC3D2691A24800D3DAA6 /* ArticleContentView.swift */,
+				66C6FC3F2691A26300D3DAA6 /* ArticleFavoriteContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		66C6FC412691A27A00D3DAA6 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				66C6FC422691A28400D3DAA6 /* Indicator.swift */,
+				66C6FC442691A29E00D3DAA6 /* WebView.swift */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		66C6FC462691A30D00D3DAA6 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				66C6FC472691A31D00D3DAA6 /* Data.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +162,10 @@
 			dependencies = (
 			);
 			name = misoranmen;
+			packageProductDependencies = (
+				66C6FC2926919E1400D3DAA6 /* ComposableArchitecture */,
+				66C6FC2C26919E6200D3DAA6 /* Kingfisher */,
+			);
 			productName = misoranmen;
 			productReference = 66C6FC1626919DAF00D3DAA6 /* misoranmen.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +193,10 @@
 				Base,
 			);
 			mainGroup = 66C6FC0D26919DAF00D3DAA6;
+			packageReferences = (
+				66C6FC2826919E1400D3DAA6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				66C6FC2B26919E6200D3DAA6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 66C6FC1726919DAF00D3DAA6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,8 +223,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C6FC382691A1A700D3DAA6 /* ApiClient.swift in Sources */,
 				66C6FC1C26919DAF00D3DAA6 /* ContentView.swift in Sources */,
+				66C6FC432691A28400D3DAA6 /* Indicator.swift in Sources */,
+				66C6FC322691A16E00D3DAA6 /* Action.swift in Sources */,
 				66C6FC1A26919DAF00D3DAA6 /* misoranmenApp.swift in Sources */,
+				66C6FC3B2691A20400D3DAA6 /* Article.swift in Sources */,
+				66C6FC302691A16600D3DAA6 /* State.swift in Sources */,
+				66C6FC402691A26300D3DAA6 /* ArticleFavoriteContentView.swift in Sources */,
+				66C6FC482691A31D00D3DAA6 /* Data.swift in Sources */,
+				66C6FC342691A17D00D3DAA6 /* Reducer.swift in Sources */,
+				66C6FC452691A29E00D3DAA6 /* WebView.swift in Sources */,
+				66C6FC3E2691A24800D3DAA6 /* ArticleContentView.swift in Sources */,
+				66C6FC362691A18A00D3DAA6 /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +424,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		66C6FC2826919E1400D3DAA6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.20.0;
+			};
+		};
+		66C6FC2B26919E6200D3DAA6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		66C6FC2926919E1400D3DAA6 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66C6FC2826919E1400D3DAA6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		66C6FC2C26919E6200D3DAA6 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66C6FC2B26919E6200D3DAA6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 66C6FC0E26919DAF00D3DAA6 /* Project object */;
 }

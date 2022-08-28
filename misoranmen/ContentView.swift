@@ -9,21 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let store: Store<ArticleState, ArticleAction>
+    let store: Store<AppState, AppAction>
     
     var body: some View {
         NavigationView {
             WithViewStore(store) { viewStore in
                 TabView {
-                    ArticleContentView(store: store)
-                        .tabItem {
-                            Label("article", systemImage: "gamecontroller")
-                        }
+                    ArticlesView(
+                        store: store.scope(
+                            state: \.articlesState,
+                            action: AppAction.articlesAction
+                        )
+                    )
+                    .tabItem {
+                        Label("article", systemImage: "gamecontroller")
+                    }
                     
-                    ArticleFavoriteContentView(store: store)
-                        .tabItem {
-                            Label("favorite", systemImage: "star")
-                        }
+//                    ArticleFavoriteContentView(
+//                        store: store.scope(
+//                            state: \.fa,
+//                            action: AppAction.articlesAction
+//                        )
+//                    )
+//                    .tabItem {
+//                        Label("favorite", systemImage: "star")
+//                    }
                 }
                 .navigationBarTitle("Article List", displayMode: .inline)
                 .navigationBarItems(
@@ -38,8 +48,8 @@ struct ContentView: View {
                         })
                     })
             }
-            
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

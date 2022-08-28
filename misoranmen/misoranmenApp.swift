@@ -13,9 +13,9 @@ struct misoranmenApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(store: Store(
-                initialState: ArticleState(),
-                reducer: articleReducer.debug(),
-                environment: ArticleEnvironment(
+                initialState: AppState(),
+                reducer: appReducer,
+                environment: AppEnvironment(
                     qiitaAPIClient: QiitaAPIClient.live
                 )
             ))

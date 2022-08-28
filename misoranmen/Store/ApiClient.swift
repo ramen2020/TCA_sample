@@ -25,7 +25,6 @@ extension QiitaAPIClient {
             components.queryItems = [
                 URLQueryItem(name: "per_page", value: "5"),
             ]
-            
             var request = URLRequest(url: components.url!)
             request.allHTTPHeaderFields = ["Authorization": "Bearer \(APIConst.ACCESS_TOKEN)"]
             
@@ -42,7 +41,6 @@ extension QiitaAPIClient {
                 URLQueryItem(name: "per_page", value: "5"),
                 URLQueryItem(name: "query", value: searchWord)
             ]
-            
             var request = URLRequest(url: components.url!)
             request.allHTTPHeaderFields = ["Authorization": "Bearer \(APIConst.ACCESS_TOKEN)"]
             
@@ -53,10 +51,8 @@ extension QiitaAPIClient {
                 .eraseToEffect()
         },
         getArticleById:{ articleId -> Effect<Article, ArticleApiError> in
-            let url = URL(string: APIConst.BASE_URL + "/\(articleId)")!
-            var request = URLRequest(url: url)
             var components = URLComponents(string: APIConst.BASE_URL + "/\(articleId)")!
-            
+            var request = URLRequest(url: components.url!)
             request.allHTTPHeaderFields = ["Authorization": "Bearer \(APIConst.ACCESS_TOKEN)"]
             
             return URLSession.shared.dataTaskPublisher(for: request)

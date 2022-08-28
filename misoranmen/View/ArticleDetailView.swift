@@ -86,14 +86,14 @@ struct ArticleDetailView: View {
                         .scaledToFit()
                     VStack(alignment: .leading, spacing: 8) {
                         Text(articleDetail.user.name)
-                            .font(.headline)
+                            .font(.caption)
                             .foregroundColor(.gray)
                         Text(articleDetail.title)
-                            .font(.largeTitle)
-                        
+                            .font(.body)
                             .foregroundColor(.black)
                         
                     }
+                    .padding()
                     .multilineTextAlignment(.leading)
                 }
             }

@@ -21,22 +21,26 @@ struct AppEnvironment {
     var qiitaAPIClient: QiitaAPIClient
 }
 
-let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
-    .init { state, action, environment in
-        switch action {
-        case .articlesAction, .favoriteArticlesAction, .articleDetail:
-            return .none
-        }
-    },
-    articlesReducer
-        .optional()
-        .pullback(
-            state: \.articlesState,
-            action: /AppAction.articlesAction,
-            environment: {
-                ArticlesEnvironment(
-                    qiitaAPIClient: $0.qiitaAPIClient
+let appReducer: Reducer<AppState, AppAction, AppEnvironment> =
+Reducer<AppState, AppAction, AppEnvironment>
+    .recurse { (self) in
+        .combine(
+            .init { state, action, environment in
+                switch action {
+                case .articlesAction, .favoriteArticlesAction, .articleDetail:
+                    return .none
+                }
+            },
+            articlesReducer
+                .optional()
+                .pullback(
+                    state: \.articlesState,
+                    action: /AppAction.articlesAction,
+                    environment: {
+                        ArticlesEnvironment(
+                            qiitaAPIClient: $0.qiitaAPIClient
+                        )
+                    }
                 )
-            }
         )
-)
+    }

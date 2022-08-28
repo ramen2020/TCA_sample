@@ -24,35 +24,8 @@ struct ArticleDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            card
-                .padding()
-            
-            List {
-                if let articles = viewStore.state.articles {
-                    ForEach(articles) { article in
-                        HStack(spacing: 16) {
-                            KFImage(URL(string: article.user.profile_image_url)!)
-                                .frame(width: 40, height: 40)
-                                .clipShape(Circle())
-                            VStack(alignment: .leading) {
-                                Text("\(article.title)")
-                                    .font(.system(size: 15))
-                                Text("\(article.user.name)")
-                                    .foregroundColor(.red)
-                                    .font(.system(size: 12))
-                            }
-                        }
-                        .padding()
-                        .onTapGesture {
-                            viewStore.send(.setNavigation(.articleDetail(article.id)))
-                        }
-                    }
-                } else {
-                    Indicator()
-                        .frame(width: 44, height: 44)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-            }
+            card.padding()
+            articlesList
         }
         .background(navigationLinks)
         .background(articlesNavigationLink)
@@ -73,7 +46,7 @@ struct ArticleDetailView: View {
         }
     }
     
-    var card: some View {
+    private var card: some View {
         Button {
             if let articleId = viewStore.articleId {
                 viewStore.send(.setNavigation(.articleDetail(articleId)))
@@ -95,6 +68,36 @@ struct ArticleDetailView: View {
                     }
                     .padding()
                     .multilineTextAlignment(.leading)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var articlesList: some View {
+        if let articles = viewStore.state.articles {
+            List {
+                Section {
+                    ForEach(articles) { article in
+                        HStack(spacing: 16) {
+                            KFImage(URL(string: article.user.profile_image_url)!)
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
+                            VStack(alignment: .leading) {
+                                Text("\(article.title)")
+                                    .font(.system(size: 15))
+                                Text("\(article.user.name)")
+                                    .foregroundColor(.red)
+                                    .font(.system(size: 12))
+                            }
+                        }
+                        .padding()
+                        .onTapGesture {
+                            viewStore.send(.setNavigation(.articleDetail(article.id)))
+                        }
+                    }
+                } header: {
+                    Text("新着投稿")
                 }
             }
         }

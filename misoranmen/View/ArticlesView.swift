@@ -55,24 +55,31 @@ struct ArticlesView: View {
                 if viewStore.state.articles.isEmpty {
                     Indicator().frame(width: 44, height: 44)
                 } else {
-                    ForEach(viewStore.state.articles) { article in
-                        HStack(spacing: 16) {
-                            KFImage(URL(string: article.user.profile_image_url)!)
-                                .frame(width: 40, height: 40)
-                                .clipShape(Circle())
-                            VStack(alignment: .leading) {
-                                Text("\(article.title)")
-                                    .font(.system(size: 15))
-                                Text("\(article.user.name)")
-                                    .foregroundColor(.red)
-                                    .font(.system(size: 12))
+                    Section {
+                        ForEach(Array(viewStore.state.articles.enumerated()), id:\.offset) { index, article in
+                            HStack(spacing: 16) {
+                                KFImage(URL(string: article.user.profile_image_url)!)
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                                VStack(alignment: .leading) {
+                                    Text("\(article.title)")
+                                        .font(.system(size: 15))
+                                    Text("\(article.user.name)")
+                                        .foregroundColor(.red)
+                                        .font(.system(size: 12))
+                                }
+                            }
+                            .onAppear{
+                                viewStore.send(.loadNext(index))
+                            }
+                            .padding()
+                            .onTapGesture {
+                                viewStore.send(.setNavigation(.articleDetail(article.id)))
                             }
                         }
-                        .padding()
-                        .onTapGesture {
-                            viewStore.send(.setNavigation(.articleDetail(article.id)))
-                        }
-                    }
+                   } header: {
+                       Text("新着投稿")
+                   }
                 }
             }
             .onAppear{

@@ -10,7 +10,7 @@ import ComposableArchitecture
 import Foundation
 
 struct QiitaAPIClient {
-    var getArticle: () -> Effect<[Article], ArticleApiError>
+    var getArticle: (Int, Int) -> Effect<[Article], ArticleApiError>
     var getArticleBySearch: (String) -> Effect<[Article], ArticleApiError>
     var getArticleById: (String) -> Effect<Article, ArticleApiError>
     
@@ -20,10 +20,11 @@ struct QiitaAPIClient {
 extension QiitaAPIClient {
     static let live = QiitaAPIClient(
         // 記事一覧取得
-        getArticle: { () -> Effect<[Article], ArticleApiError> in
+        getArticle: { page, perPage -> Effect<[Article], ArticleApiError> in
             var components = URLComponents(string: APIConst.BASE_URL)!
             components.queryItems = [
-                URLQueryItem(name: "per_page", value: "5"),
+                URLQueryItem(name: "per_page", value: "\(perPage)"),
+                URLQueryItem(name: "page", value: "\(page)"),
             ]
             var request = URLRequest(url: components.url!)
             request.allHTTPHeaderFields = ["Authorization": "Bearer \(APIConst.ACCESS_TOKEN)"]
@@ -38,7 +39,7 @@ extension QiitaAPIClient {
         getArticleBySearch:{ searchWord -> Effect<[Article], ArticleApiError> in
             var components = URLComponents(string: APIConst.BASE_URL)!
             components.queryItems = [
-                URLQueryItem(name: "per_page", value: "5"),
+                URLQueryItem(name: "per_page", value: "10"),
                 URLQueryItem(name: "query", value: searchWord)
             ]
             var request = URLRequest(url: components.url!)
@@ -47,7 +48,7 @@ extension QiitaAPIClient {
             return URLSession.shared.dataTaskPublisher(for: components.url!)
                 .map { data, _ in data }
                 .decode(type: [Article].self, decoder: JSONDecoder())
-                .mapError { _ in ArticleApiError() }
+                .mapError { error in ArticleApiError() }
                 .eraseToEffect()
         },
         getArticleById:{ articleId -> Effect<Article, ArticleApiError> in

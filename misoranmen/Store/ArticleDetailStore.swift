@@ -80,7 +80,7 @@ let articleDetailReducer: Reducer<ArticleDetailState, ArticleDetailAction, Artic
                     // 記事一覧取得
                 case .featchArticles:
                     return environment.qiitaAPIClient
-                        .getArticle()
+                        .getArticle(1, 5)
                         .receive(on: DispatchQueue.main)
                         .catchToEffect()
                         .map(ArticleDetailAction.featchArticlesResponse)

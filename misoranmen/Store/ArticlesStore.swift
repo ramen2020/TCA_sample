@@ -15,7 +15,8 @@ enum ArticlesAction: Equatable {
     case typingSearchWord(searchWord: String)
     case featchArticlesBySearchWord(searchWord: String)
     case featchArticlesResponse(Result<[Article], QiitaAPIClient.ArticleApiError>)
-    
+    case loadNext(Int)
+
     case articleDetailAction(ArticleDetailAction)
 }
 
@@ -27,6 +28,11 @@ struct ArticlesState: Equatable {
     var route: Route?
     var articles: [Article] = []
     var searchWord = ""
+    var currentPage = 0
+    var perPage = 10
+    var loadingId: Int {
+        perPage * currentPage - 5
+    }
     
     @Heap var articleDetailState: ArticleDetailState!
     
@@ -56,8 +62,9 @@ let articlesReducer: Reducer<ArticlesState, ArticlesAction, ArticlesEnvironment>
                     return .none
                     // 記事一覧取得
                 case .featchArticles:
+                    state.currentPage = state.currentPage + 1
                     return environment.qiitaAPIClient
-                        .getArticle()
+                        .getArticle(state.currentPage, state.perPage)
                         .receive(on: DispatchQueue.main)
                         .catchToEffect()
                         .map(ArticlesAction.featchArticlesResponse)
@@ -77,8 +84,11 @@ let articlesReducer: Reducer<ArticlesState, ArticlesAction, ArticlesEnvironment>
                     return .none
                     // 記事取得成功
                 case let .featchArticlesResponse(.success(articles)):
-                    state.articles = articles
+                    state.articles += articles
                     return .none
+                case .loadNext(let index):
+                    guard state.loadingId == index else {return .none}
+                    return .init(value: .featchArticles)
                 case .articleDetailAction(_):
                     return .none
                 }

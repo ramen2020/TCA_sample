@@ -37,7 +37,6 @@ extension QiitaAPIClient {
         },
         // 記事検索取得
         getArticleBySearch:{ searchWord -> Effect<[Article], ArticleApiError> in
-            print("検索API実行：　\(searchWord)")
             var components = URLComponents(string: APIConst.BASE_URL)!
             components.queryItems = [
                 URLQueryItem(name: "per_page", value: "5"),

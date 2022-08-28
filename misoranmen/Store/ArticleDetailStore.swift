@@ -58,19 +58,16 @@ let articleDetailReducer: Reducer<ArticleDetailState, ArticleDetailAction, Artic
                     state.route = nil
                     return .none
                 case .onAppear:
-                    print(":::: onAppear じっこう")
                     var effects = [Effect<ArticleDetailAction, Never>]()
                     effects.append(.init(value: .featchArticle))
                     effects.append(.init(value: .featchArticles))
                     return .merge(effects)
                     // 記事詳細取得
                 case let .featchArticleResponse(.failure(error)):
-                    print("えらー： \(error.localizedDescription)")
                     return .none
                     
                     // 記事取得成功
                 case let .featchArticleResponse(.success(article)):
-                    print("::: 成功")
                     state.articleDetail = article
                     return .none
                 case .featchArticle:
@@ -89,7 +86,6 @@ let articleDetailReducer: Reducer<ArticleDetailState, ArticleDetailAction, Artic
                         .map(ArticleDetailAction.featchArticlesResponse)
                     // 記事取得失敗
                 case let .featchArticlesResponse(.failure(error)):
-                    print("えらー２： \(error.localizedDescription)")
                     return .none
                     
                     // 記事取得成功

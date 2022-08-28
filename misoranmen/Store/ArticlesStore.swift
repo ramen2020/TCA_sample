@@ -44,12 +44,9 @@ let articlesReducer: Reducer<ArticlesState, ArticlesAction, ArticlesEnvironment>
             .init { state, action, environment in
                 switch action {
                 case .setNavigation(let route):
-                    print("せんい", route)
                     switch route {
                     case .articleDetail(let articleId):
                         state.articleDetailState = .init(articleId: articleId)
-                        print("::: articleId: ", articleId)
-                        print("::: state.articleDetailState: ", state.articleDetailState)
                     default: break
                     }
                     state.route = route
@@ -77,7 +74,6 @@ let articlesReducer: Reducer<ArticlesState, ArticlesAction, ArticlesEnvironment>
                         .map(ArticlesAction.featchArticlesResponse)
                     // 記事取得失敗
                 case let .featchArticlesResponse(.failure(error)):
-                    print("えらー： \(error.localizedDescription)")
                     return .none
                     // 記事取得成功
                 case let .featchArticlesResponse(.success(articles)):

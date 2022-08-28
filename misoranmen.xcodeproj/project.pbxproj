@@ -14,6 +14,7 @@
 		359332C928BB539C001D1EF2 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359332C828BB539C001D1EF2 /* ArticleDetailView.swift */; };
 		359332CC28BB5604001D1EF2 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359332CB28BB5604001D1EF2 /* Reducer.swift */; };
 		359332CF28BB5C00001D1EF2 /* Heap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359332CE28BB5C00001D1EF2 /* Heap.swift */; };
+		359332D128BB7892001D1EF2 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359332D028BB7892001D1EF2 /* AccessToken.swift */; };
 		66C6FC1A26919DAF00D3DAA6 /* misoranmenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC1926919DAF00D3DAA6 /* misoranmenApp.swift */; };
 		66C6FC1C26919DAF00D3DAA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC1B26919DAF00D3DAA6 /* ContentView.swift */; };
 		66C6FC1E26919DB000D3DAA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66C6FC1D26919DB000D3DAA6 /* Assets.xcassets */; };
@@ -26,7 +27,7 @@
 		66C6FC402691A26300D3DAA6 /* ArticleFavoriteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC3F2691A26300D3DAA6 /* ArticleFavoriteContentView.swift */; };
 		66C6FC432691A28400D3DAA6 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC422691A28400D3DAA6 /* Indicator.swift */; };
 		66C6FC452691A29E00D3DAA6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC442691A29E00D3DAA6 /* WebView.swift */; };
-		66C6FC482691A31D00D3DAA6 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC472691A31D00D3DAA6 /* Data.swift */; };
+		66C6FC482691A31D00D3DAA6 /* APIConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FC472691A31D00D3DAA6 /* APIConst.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		359332C828BB539C001D1EF2 /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
 		359332CB28BB5604001D1EF2 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		359332CE28BB5C00001D1EF2 /* Heap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heap.swift; sourceTree = "<group>"; };
+		359332D028BB7892001D1EF2 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		66C6FC1626919DAF00D3DAA6 /* misoranmen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = misoranmen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C6FC1926919DAF00D3DAA6 /* misoranmenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = misoranmenApp.swift; sourceTree = "<group>"; };
 		66C6FC1B26919DAF00D3DAA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,7 +50,7 @@
 		66C6FC3F2691A26300D3DAA6 /* ArticleFavoriteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleFavoriteContentView.swift; sourceTree = "<group>"; };
 		66C6FC422691A28400D3DAA6 /* Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
 		66C6FC442691A29E00D3DAA6 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		66C6FC472691A31D00D3DAA6 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		66C6FC472691A31D00D3DAA6 /* APIConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConst.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +167,8 @@
 		66C6FC462691A30D00D3DAA6 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				66C6FC472691A31D00D3DAA6 /* Data.swift */,
+				66C6FC472691A31D00D3DAA6 /* APIConst.swift */,
+				359332D028BB7892001D1EF2 /* AccessToken.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -256,11 +259,12 @@
 				359332CC28BB5604001D1EF2 /* Reducer.swift in Sources */,
 				66C6FC1A26919DAF00D3DAA6 /* misoranmenApp.swift in Sources */,
 				359332CF28BB5C00001D1EF2 /* Heap.swift in Sources */,
+				359332D128BB7892001D1EF2 /* AccessToken.swift in Sources */,
 				359332C328BB4DEE001D1EF2 /* AppStore.swift in Sources */,
 				359332C728BB4E16001D1EF2 /* ArticleDetailStore.swift in Sources */,
 				66C6FC3B2691A20400D3DAA6 /* Article.swift in Sources */,
 				66C6FC402691A26300D3DAA6 /* ArticleFavoriteContentView.swift in Sources */,
-				66C6FC482691A31D00D3DAA6 /* Data.swift in Sources */,
+				66C6FC482691A31D00D3DAA6 /* APIConst.swift in Sources */,
 				66C6FC452691A29E00D3DAA6 /* WebView.swift in Sources */,
 				66C6FC3E2691A24800D3DAA6 /* ArticlesView.swift in Sources */,
 				359332C928BB539C001D1EF2 /* ArticleDetailView.swift in Sources */,

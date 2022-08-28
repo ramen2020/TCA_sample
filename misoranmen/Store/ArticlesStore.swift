@@ -15,21 +15,21 @@ enum ArticlesAction: Equatable {
     case typingSearchWord(searchWord: String)
     case featchArticlesBySearchWord(searchWord: String)
     case featchArticlesResponse(Result<[Article], QiitaAPIClient.ArticleApiError>)
-
+    
     case articleDetailAction(ArticleDetailAction)
 }
 
 struct ArticlesState: Equatable {
     enum Route: Equatable, Hashable {
         case articles
-        case articleDetail
+        case articleDetail(String)
     }
     var route: Route?
     var articles: [Article] = []
     var searchWord = ""
-
+    
     @Heap var articleDetailState: ArticleDetailState!
-
+    
     init() {
         _articleDetailState = .init(.init())
     }
@@ -44,9 +44,12 @@ let articlesReducer: Reducer<ArticlesState, ArticlesAction, ArticlesEnvironment>
             .init { state, action, environment in
                 switch action {
                 case .setNavigation(let route):
-                    switch state.route {
-                    case .articleDetail:
-                        state.articleDetailState = .init()
+                    print("せんい", route)
+                    switch route {
+                    case .articleDetail(let articleId):
+                        state.articleDetailState = .init(articleId: articleId)
+                        print("::: articleId: ", articleId)
+                        print("::: state.articleDetailState: ", state.articleDetailState)
                     default: break
                     }
                     state.route = route

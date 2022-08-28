@@ -7,8 +7,9 @@ indirect enum ArticleDetailAction: Equatable {
     case onAppear
     case featchArticle
     case featchArticles
+    case featchArticleResponse(Result<Article, QiitaAPIClient.ArticleApiError>)
     case featchArticlesResponse(Result<[Article], QiitaAPIClient.ArticleApiError>)
-
+    
     case articlesAction(ArticlesAction)
     case articleDetailAction(ArticleDetailAction)
 }
@@ -16,17 +17,19 @@ indirect enum ArticleDetailAction: Equatable {
 struct ArticleDetailState: Equatable {
     enum Route: Equatable, Hashable {
         case articles
-        case articleDetail
+        case articleDetail(String)
     }
-
+    
+    var articleId: String?
     var articleDetail: Article?
     var articles: [Article]?
     var route: Route?
-
+    
     @Heap var articlesState: ArticlesState!
     @Heap var articleDetailState: ArticleDetailState!
-
-    init() {
+    
+    init(articleId: String? = nil) {
+        self.articleId = articleId
         _articleDetailState = .init(nil)
         _articlesState = .init(nil)
     }
@@ -43,8 +46,8 @@ let articleDetailReducer: Reducer<ArticleDetailState, ArticleDetailAction, Artic
                 switch action {
                 case .setNavigation(let route):
                     switch route {
-                    case .articleDetail:
-                        state.articleDetailState = .init()
+                    case .articleDetail(let articleId):
+                        state.articleDetailState = .init(articleId: articleId)
                     case .articles:
                         state.articlesState = .init()
                     }
@@ -55,14 +58,28 @@ let articleDetailReducer: Reducer<ArticleDetailState, ArticleDetailAction, Artic
                     state.route = nil
                     return .none
                 case .onAppear:
-                    //        var effects = [Effect<ArticleDetailAction, Never>]()
-                    //        effects.append(.init(value: .featchArticle))
-                    //        effects.append(.init(value: .featchArticles))
-                    //        return .merge(effects)
-                    return .none
+                    print(":::: onAppear じっこう")
+                    var effects = [Effect<ArticleDetailAction, Never>]()
+                    effects.append(.init(value: .featchArticle))
+                    effects.append(.init(value: .featchArticles))
+                    return .merge(effects)
                     // 記事詳細取得
-                case .featchArticle:
+                case let .featchArticleResponse(.failure(error)):
+                    print("えらー： \(error.localizedDescription)")
                     return .none
+                    
+                    // 記事取得成功
+                case let .featchArticleResponse(.success(article)):
+                    print("::: 成功")
+                    state.articleDetail = article
+                    return .none
+                case .featchArticle:
+                    guard let articleId = state.articleId else {return .none}
+                    return environment.qiitaAPIClient
+                        .getArticleById(articleId)
+                        .receive(on: DispatchQueue.main)
+                        .catchToEffect()
+                        .map(ArticleDetailAction.featchArticleResponse)
                     // 記事一覧取得
                 case .featchArticles:
                     return environment.qiitaAPIClient
@@ -74,7 +91,7 @@ let articleDetailReducer: Reducer<ArticleDetailState, ArticleDetailAction, Artic
                 case let .featchArticlesResponse(.failure(error)):
                     print("えらー２： \(error.localizedDescription)")
                     return .none
-
+                    
                     // 記事取得成功
                 case let .featchArticlesResponse(.success(articles)):
                     state.articles = articles
@@ -83,14 +100,14 @@ let articleDetailReducer: Reducer<ArticleDetailState, ArticleDetailAction, Artic
                     guard state.articleDetailState?.articleDetailState != nil else { break }
                     return self.run(&state.articleDetailState!.articleDetailState!, action, environment)
                         .map{.articleDetailAction(.articleDetailAction($0))}
-
+                    
                 case .articlesAction(.articleDetailAction(let recursiveAction)):
                     guard state.articlesState != nil else { return .none }
                     return self.run(&state.articlesState!.articleDetailState, recursiveAction, environment)
                         .map({ ArticleDetailAction.articlesAction(.articleDetailAction($0)) })
                 default: break
                 }
-
+                
                 return .none
             },
             articleDetailReducer

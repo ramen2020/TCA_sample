@@ -14,28 +14,28 @@ import Kingfisher
 struct ArticlesView: View {
     let store: Store<ArticlesState, ArticlesAction>
     @ObservedObject var viewStore: ViewStore<ArticlesState, ArticlesAction>
-
+    
     public init(
         store: Store<ArticlesState, ArticlesAction>
     ) {
         self.store = store
         viewStore = ViewStore(store)
     }
-
-
+    
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 TextField(
                     "検索してください。",
                     text: viewStore.binding(
-                            get: \.searchWord, send: ArticlesAction.typingSearchWord),
+                        get: \.searchWord, send: ArticlesAction.typingSearchWord),
                     onCommit: {
                         viewStore.send(.featchArticlesBySearchWord(searchWord: viewStore.state.searchWord))
                     }
                 )
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-
+                
                 Button (action: {
                     viewStore.send(.featchArticlesBySearchWord(searchWord: viewStore.state.searchWord))
                 }) {
@@ -56,7 +56,7 @@ struct ArticlesView: View {
                     Indicator().frame(width: 44, height: 44)
                 } else {
                     ForEach(viewStore.state.articles) { article in
-                        HStack {
+                        HStack(spacing: 16) {
                             KFImage(URL(string: article.user.profile_image_url)!)
                                 .frame(width: 40, height: 40)
                                 .clipShape(Circle())
@@ -68,17 +68,15 @@ struct ArticlesView: View {
                                     .font(.system(size: 12))
                             }
                         }
-                    }
-                    .onTapGesture {
-                        viewStore.send(.setNavigation(.articleDetail))
+                        .padding()
+                        .onTapGesture {
+                            viewStore.send(.setNavigation(.articleDetail(article.id)))
+                        }
                     }
                 }
             }
             .onAppear{
-                // タブ切り替える度に、実行されてしまうのを制御
-                if viewStore.articles.isEmpty {
-                    viewStore.send(.featchArticles)
-                }
+                viewStore.send(.featchArticles)
             }
         }
         .background(navigationLinks)
@@ -93,7 +91,7 @@ extension ArticlesView {
         NavigationLink(
             unwrapping: viewStore.binding(get: \.route, send: .dismiss),
             case: /ArticlesState.Route.articleDetail
-        ) { _ in
+        ) { articleDetailId in
             ArticleDetailView(
                 store: store.scope(
                     state: \.articleDetailState,

@@ -8,32 +8,59 @@
 import Foundation
 import ComposableArchitecture
 import SwiftUI
+import SwiftUINavigation
 import Kingfisher
 
 struct ArticleDetailView: View {
     let store: Store<ArticleDetailState, ArticleDetailAction>
     @ObservedObject var viewStore: ViewStore<ArticleDetailState, ArticleDetailAction>
-
+    
     public init(
         store: Store<ArticleDetailState, ArticleDetailAction>
     ) {
         self.store = store
         viewStore = ViewStore(store)
     }
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             card
                 .padding()
-            Spacer()
+            
+            List {
+                if let articles = viewStore.state.articles {
+                    ForEach(articles) { article in
+                        HStack(spacing: 16) {
+                            KFImage(URL(string: article.user.profile_image_url)!)
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
+                            VStack(alignment: .leading) {
+                                Text("\(article.title)")
+                                    .font(.system(size: 15))
+                                Text("\(article.user.name)")
+                                    .foregroundColor(.red)
+                                    .font(.system(size: 12))
+                            }
+                        }
+                        .padding()
+                        .onTapGesture {
+                            viewStore.send(.setNavigation(.articleDetail(article.id)))
+                        }
+                    }
+                } else {
+                    Indicator()
+                        .frame(width: 44, height: 44)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
         }
         .background(navigationLinks)
         .background(articlesNavigationLink)
-        .onAppear{
-            viewStore.send(.onAppear)
-        }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
+        }
+        .onAppear {
+            viewStore.send(.onAppear)
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -45,28 +72,29 @@ struct ArticleDetailView: View {
             }
         }
     }
-
+    
     var card: some View {
         Button {
-            viewStore.send(.setNavigation(.articleDetail))
+            if let articleId = viewStore.articleId {
+                viewStore.send(.setNavigation(.articleDetail(articleId)))
+            }
         } label: {
-            ZStack(alignment: .top) {
-                Image("frozen")
-                    .resizable()
-                    .scaledToFit()
-                HStack {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("title")
+            if let articleDetail = viewStore.articleDetail {
+                VStack(alignment: .center, spacing: 16) {
+                    KFImage(URL(string: articleDetail.user.profile_image_url)!)
+                        .resizable()
+                        .scaledToFit()
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(articleDetail.user.name)
                             .font(.headline)
-                            .foregroundColor(.white)
-                            .shadow(radius: 4.0)
-                        Text("APP OF THE DAY")
+                            .foregroundColor(.gray)
+                        Text(articleDetail.title)
                             .font(.largeTitle)
-                            .foregroundColor(.white)
-                            .shadow(radius: 4.0)
+                        
+                            .foregroundColor(.black)
+                        
                     }
-                    .padding()
-                    Spacer()
+                    .multilineTextAlignment(.leading)
                 }
             }
         }
@@ -78,7 +106,7 @@ extension ArticleDetailView {
         NavigationLink(
             unwrapping: viewStore.binding(get: \.route, send: .dismiss),
             case: /ArticleDetailState.Route.articleDetail
-        ) { _ in
+        ) { articleId in
             ArticleDetailView(
                 store: store.scope(
                     state: \.articleDetailState,
@@ -89,7 +117,7 @@ extension ArticleDetailView {
         } label: {
         }
     }
-
+    
     var articlesNavigationLink: some View {
         NavigationLink(
             unwrapping: viewStore.binding(get: \.route, send: .dismiss),

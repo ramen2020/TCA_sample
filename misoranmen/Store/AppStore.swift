@@ -8,10 +8,10 @@ enum AppAction: Equatable {
 }
 
 struct AppState: Equatable {
-
+    
     @Heap var articlesState: ArticlesState!
-    var articleDetailState = ArticleDetailState()
-
+    //    var articleDetailState = ArticleDetailState()
+    
     init(id: String = UUID().uuidString) {
         _articlesState = .init(.init())
     }

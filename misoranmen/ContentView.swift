@@ -36,17 +36,6 @@ struct ContentView: View {
 //                    }
                 }
                 .navigationBarTitle("Article List", displayMode: .inline)
-                .navigationBarItems(
-                    trailing: HStack {
-                        Button(action: {
-                            //
-                        }, label: {
-                            Image(systemName: "person.fill")
-                                .resizable()
-                                .frame(width: 22, height: 22)
-                                .padding()
-                        })
-                    })
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())

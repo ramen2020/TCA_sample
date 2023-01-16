@@ -15,7 +15,7 @@ struct misoranmenApp: App {
             ContentView(store: Store(
                 initialState: AppState(),
                 reducer: appReducer,
-                environment: AppEnvironment(
+                 environment: AppEnvironment(
                     qiitaAPIClient: QiitaAPIClient.live
                 )
             ))

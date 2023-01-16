@@ -8,6 +8,6 @@
 import Foundation
 
 final class APIConst {
-    static let BASE_URL = "https://qiita.com/api/v2/items"
+     static let BASE_URL = "https://qiita.com/api/v2/items"
 }
 

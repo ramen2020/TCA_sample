@@ -18,7 +18,7 @@ struct ContentView: View {
                     ArticlesView(
                         store: store.scope(
                             state: \.articlesState,
-                            action: AppAction.articlesAction
+                              action: AppAction.articlesAction
                         )
                     )
                     .tabItem {
